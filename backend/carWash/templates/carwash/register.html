@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        gap: 6px;
+        margin: auto;
+      }
+
+      p {
+        width: 25%;
+        margin: auto;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form action="{% url 'carWash:register' %}" method="post">
+      {% csrf_token %}
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+      <label for="username">Username</label>
+      <input type="text" name="username" />
+      <label for="password">Password</label>
+      <input type="password" name="password" />
+      <label for="repeatPassword">Repeat Password</label>
+      <input type="password" name="repeatPassword" />
+      {% if error_message %}
+      <p><strong>{{error_message}} </strong></p>
+      {%endif%}
+      <button type="submit" style="width: 25%">Submit</button>
+    </form>
+
+    <p>Already registered? <a href="{% url 'carWash:login' %}">login</a></p>
+  </body>
+</html>

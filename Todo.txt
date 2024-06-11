@@ -1,8 +1,12 @@
 make with django templates
++ apply migrations
++ create superuser
 authentication
-    make login screen
-    make login db
-        do you use django.authentication or smth?
-        j
+    + make login screen
+    + make login db
+        + do you use django.authentication or smth?
+    authenticate and redirect
+        error handling
+        
 user adds his car to his profile
 make an appointment with his car

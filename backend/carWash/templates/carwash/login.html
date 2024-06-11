@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        gap: 6px;
+        margin: auto;
+      }
+      p {
+        width: 25%;
+        margin: auto;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="{% url 'carWash:login' %}" method="post">
+      {% csrf_token %}
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+      <label for="password">Password</label>
+      <input type="password" name="password" />
+      {% if error_message %}
+      <p><strong>{{error_message}} </strong></p>
+      {%endif%}
+      <button type="submit" style="width: 25%">Submit</button>
+    </form>
+
+    <p>
+      Don't have an account? <a href="{% url 'carWash:register' %}">register</a>
+    </p> 
+  </body>
+</html>

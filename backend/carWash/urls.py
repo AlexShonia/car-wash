@@ -1,6 +1,10 @@
-from django.utils import path
+from django.urls import path
 
 from . import views
 
 app_name = "carWash"
-urlpatterns = [path("", views.indexView, name="index")]
+urlpatterns = [
+    path("", views.indexView, name="index"),
+    path("login", views.login, name="login"),
+    path("register", views.register, name="register"),
+]
