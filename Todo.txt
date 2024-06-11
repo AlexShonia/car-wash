@@ -1,0 +1,8 @@
+make with django templates
+authentication
+    make login screen
+    make login db
+        do you use django.authentication or smth?
+        j
+user adds his car to his profile
+make an appointment with his car
