@@ -17,10 +17,18 @@
         margin: auto;
         margin-top: 6px;
       }
+      .nav {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+      }
     </style>
   </head>
   <body>
-    <h1>Login</h1>
+    <div class="nav">
+      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
+      <h1>Login</h1>
+    </div>
     <form action="{% url 'carWash:login' %}" method="post">
       {% csrf_token %}
       <label for="email">Email</label>
@@ -35,6 +43,6 @@
 
     <p>
       Don't have an account? <a href="{% url 'carWash:register' %}">register</a>
-    </p> 
+    </p>
   </body>
 </html>

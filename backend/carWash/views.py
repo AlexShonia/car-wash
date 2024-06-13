@@ -1,14 +1,61 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth import authenticate, logout, login
+from django.utils import timezone
+from .models import Car, Appointment
 
 
 def indexView(request):
+    context = {"logged_in": request.user.is_authenticated}
+
+    return render(request, "carwash/index.html", context)
+
+
+def appointment(request):
+    if request.POST:
+        date = request.POST.get("date")
+        time = request.POST.get("time")
+        model = request.POST.get("car")
+        if not date or not time or not model:
+            return render(
+                request,
+                "carwash/appointment.html",
+                {"error_message": "Fill all the fields"},
+            )
+        car = Car.objects.get(model=model)
+        appointment = Appointment(user=request.user, date=(date + " " + time), car=car)
+        appointment.save()
+        context = {"logged_in": request.user.is_authenticated}
+        return render(request, "carwash/index.html", context)
+    else:
+        cars = Car.objects.filter(user=request.user)
+        print(timezone.now())
+        return render(request, "carwash/appointment.html", {"cars": cars})
+
+
+def addCar(request):
+    if request.POST:
+        brand = request.POST.get("brand")
+        model = request.POST.get("model")
+        type = request.POST.get("type")
+        if not brand or not model or not type:
+            return render(
+                request, "carwash/car.html", {"error_message": "Fill all the fields"}
+            )
+        car = Car.objects.create(user=request.user, brand=brand, model=model, type=type)
+        car.save()
+        context = {"logged_in": request.user.is_authenticated}
+        return render(request, "carwash/index.html", context)
+    else:
+        return render(request, "carwash/car.html", {})
+
+
+def logout_view(request):
+    logout(request)
     return render(request, "carwash/index.html", {})
 
 
-def login(request):
+def login_view(request):
     if request.POST:
         email = request.POST.get("email")
         password = request.POST.get("password")
@@ -24,8 +71,9 @@ def login(request):
         else:
             user = authenticate(username=u.username, password=password)
             if user is not None:
-                print("suces")
-                return render(request, "carwash/index.html", {})
+                login(request, user)
+                context = {"logged_in": request.user.is_authenticated}
+                return render(request, "carwash/index.html", context)
             else:
                 return render(
                     request,

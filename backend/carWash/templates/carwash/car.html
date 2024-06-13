@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Add your Car</title>
     <style>
       form {
         display: flex;
@@ -28,24 +28,20 @@
   <body>
     <div class="nav">
       <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
-      <h1>Register</h1>
+      <h1>Add your Car</h1>
     </div>
-    <form action="{% url 'carWash:register' %}" method="post">
+    <form action="{% url 'carWash:addCar' %}" method="post">
       {% csrf_token %}
-      <label for="email">Email</label>
-      <input type="text" name="email" />
-      <label for="username">Username</label>
-      <input type="text" name="username" />
-      <label for="password">Password</label>
-      <input type="password" name="password" />
-      <label for="repeatPassword">Repeat Password</label>
-      <input type="password" name="repeatPassword" />
+      <label for="email">Brand</label>
+      <input type="text" name="brand" />
+      <label for="model">Model</label>
+      <input type="text" name="model" />
+      <label for="type">Type</label>
+      <input type="text" name="type" />
       {% if error_message %}
       <p><strong>{{error_message}} </strong></p>
       {%endif%}
-      <button type="submit" style="width: 25%">Submit</button>
+      <button type="submit" style="width: 25%">Add</button>
     </form>
-
-    <p>Already registered? <a href="{% url 'carWash:login' %}">login</a></p>
   </body>
 </html>

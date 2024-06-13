@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
+    <title>Appointment</title>
     <style>
       form {
         display: flex;
@@ -12,7 +12,6 @@
         gap: 6px;
         margin: auto;
       }
-
       p {
         width: 25%;
         margin: auto;
@@ -28,24 +27,39 @@
   <body>
     <div class="nav">
       <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
-      <h1>Register</h1>
+      <h1>Make an appointment</h1>
     </div>
-    <form action="{% url 'carWash:register' %}" method="post">
+    <form action="{% url 'carWash:appointment' %}" method="post">
       {% csrf_token %}
-      <label for="email">Email</label>
-      <input type="text" name="email" />
-      <label for="username">Username</label>
-      <input type="text" name="username" />
-      <label for="password">Password</label>
-      <input type="password" name="password" />
-      <label for="repeatPassword">Repeat Password</label>
-      <input type="password" name="repeatPassword" />
+      <label for="date">Date</label>
+      <input
+        type="date"
+        name="date"
+        value="2024-07-22"
+        min="2024-01-01"
+        max="2024-12-31"
+        required
+      />
+      <label for="time">Time</label>
+      <input
+        type="time"
+        name="time"
+        min="09:00"
+        max="18:00"
+        step="1800"
+        required
+      />
+      <!-- <label for="car">Car</label>
+      <input type="text" name="car" /> -->
+      <select name="car">
+        {% for car in cars %}
+        <option value="{{car.model}}">{{car.brand}} {{car.model}}</option>
+        {% endfor %}
+      </select>
       {% if error_message %}
       <p><strong>{{error_message}} </strong></p>
       {%endif%}
       <button type="submit" style="width: 25%">Submit</button>
     </form>
-
-    <p>Already registered? <a href="{% url 'carWash:login' %}">login</a></p>
   </body>
 </html>

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CarWash</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Welcome to my CarWash</h1>
-    <button><a href="{% url 'carWash:login' %}">Login</a></button> 
-</body>
+    <button><a href="{% url 'carWash:login' %}">Login</a></button>
+    {% if logged_in %}
+    <button><a href="{% url 'carWash:logout' %}">Log out</a></button>
+    <button><a href="{% url 'carWash:addCar' %}">Add your Car</a></button>
+    <button>
+      <a href="{% url 'carWash:appointment' %}">Make an appointment</a>
+    </button>
+    {% endif %}
+  </body>
 </html>

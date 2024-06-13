@@ -8,5 +8,6 @@ authentication
     + authenticate and redirect
         + error handling
         
-user adds his car to his profile
-make an appointment with his car
++ user adds his car to his profile
+somehow show your added car somewhere
++ make an appointment with his car
