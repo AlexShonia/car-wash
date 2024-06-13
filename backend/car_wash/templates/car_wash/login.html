@@ -26,10 +26,10 @@
   </head>
   <body>
     <div class="nav">
-      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
+      <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
       <h1>Login</h1>
     </div>
-    <form action="{% url 'carWash:login' %}" method="post">
+    <form action="{% url 'car_wash:login' %}" method="post">
       {% csrf_token %}
       <label for="email">Email</label>
       <input type="text" name="email" />
@@ -42,7 +42,8 @@
     </form>
 
     <p>
-      Don't have an account? <a href="{% url 'carWash:register' %}">register</a>
+      Don't have an account?
+      <a href="{% url 'car_wash:register' %}">register</a>
     </p>
   </body>
 </html>

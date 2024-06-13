@@ -27,10 +27,10 @@
   </head>
   <body>
     <div class="nav">
-      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
+      <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
       <h1>Add your Car</h1>
     </div>
-    <form action="{% url 'carWash:addCar' %}" method="post">
+    <form action="{% url 'car_wash:addCar' %}" method="post">
       {% csrf_token %}
       <label for="email">Brand</label>
       <input type="text" name="brand" />

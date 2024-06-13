@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CarwashConfig(AppConfig):
+class Car_washConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'carWash'
+    name = 'car_wash'

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarWash</title>
+  </head>
+  <body>
+    <h1>Welcome to my CarWash</h1>
+
+    {% if not logged_in %}
+    <button><a href="{% url 'car_wash:login' %}">Login</a></button>
+    {% endif %} {% if logged_in %}
+    <button><a href="{% url 'car_wash:logout' %}">Log out</a></button>
+    <button><a href="{% url 'car_wash:addCar' %}">Add Car</a></button>
+    <button>
+      <a href="{% url 'car_wash:appointment' %}">Make an appointment</a>
+    </button>
+    <button>
+      <a href="{% url 'car_wash:yourCars' %}">Your Cars</a>
+    </button>
+    <button>
+      <a href="{% url 'car_wash:yourAppointments' %}">Your Appointments</a>
+    </button>
+    {% endif %}
+  </body>
+</html>

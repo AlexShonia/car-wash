@@ -14,18 +14,27 @@
   </head>
   <body>
     <div class="nav">
-      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
-      <h1>Your Cars</h1>
+      <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
+      <h1>Your Appointments</h1>
     </div>
     <form
-      action="{% url 'carWash:yourCars' %}"
+      action="{% url 'car_wash:yourAppointments' %}"
       method="post"
-      style="display: flex; flex-direction: column; gap: 4px; width: 15%; margin: auto;"
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: 15%;
+        margin: auto;
+      "
     >
-      {% csrf_token %} {% for car in cars %}
+      {% csrf_token %} {% for appointment in appointments %}
       <div style="display: flex; justify-content: space-between">
-        <div>{{car.brand}} {{car.model}}</div>
-        <input type="checkbox" name="model" value="{{car.model}}" />
+        <div>
+          {{appointment.car.brand}} {{appointment.car.model}},
+          {{appointment.date}}
+        </div>
+        <input type="checkbox" name="date" value="{{appointment.date}}" />
       </div>
       {% endfor %}
       <button type="submit">Delete selected</button>

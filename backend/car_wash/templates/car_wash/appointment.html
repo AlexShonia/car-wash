@@ -26,10 +26,10 @@
   </head>
   <body>
     <div class="nav">
-      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
+      <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
       <h1>Make an appointment</h1>
     </div>
-    <form action="{% url 'carWash:appointment' %}" method="post">
+    <form action="{% url 'car_wash:appointment' %}" method="post">
       {% csrf_token %}
       <label for="date">Date</label>
       <input
@@ -49,8 +49,6 @@
         step="1800"
         required
       />
-      <!-- <label for="car">Car</label>
-      <input type="text" name="car" /> -->
       <select name="car">
         {% for car in cars %}
         <option value="{{car.model}}">{{car.brand}} {{car.model}}</option>

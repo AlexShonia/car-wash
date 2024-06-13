@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "carWash",
+    "car_wash",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

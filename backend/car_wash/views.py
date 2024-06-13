@@ -8,30 +8,34 @@ from .models import Car, Appointment
 def indexView(request):
     context = {"logged_in": request.user.is_authenticated}
 
-    return render(request, "carwash/index.html", context)
+    return render(request, "car_wash/index.html", context)
+
 
 def yourAppointments(request):
     if request.POST:
-       carModels = request.POST.getlist("model") 
-       for model in carModels:
-           Car.objects.filter(model=model).delete()
-       context = {"logged_in": request.user.is_authenticated}
-       return render(request, "carwash/index.html", context)
+        carModels = request.POST.getlist("model")
+        for model in carModels:
+            Car.objects.filter(model=model).delete()
+        context = {"logged_in": request.user.is_authenticated}
+        return render(request, "car_wash/index.html", context)
     else:
         appointments = Appointment.objects.filter(user=request.user)
         print(appointments)
-        return render(request, "carwash/your-appointments.html", {"appointments": appointments})
+        return render(
+            request, "car_wash/your-appointments.html", {"appointments": appointments}
+        )
+
 
 def yourCars(request):
     if request.POST:
-       carModels = request.POST.getlist("model") 
-       for model in carModels:
-           Car.objects.filter(model=model).delete()
-       context = {"logged_in": request.user.is_authenticated}
-       return render(request, "carwash/index.html", context)
+        carModels = request.POST.getlist("model")
+        for model in carModels:
+            Car.objects.filter(model=model).delete()
+        context = {"logged_in": request.user.is_authenticated}
+        return render(request, "car_wash/index.html", context)
     else:
         cars = Car.objects.filter(user=request.user)
-        return render(request, "carwash/your-cars.html", {"cars": cars})
+        return render(request, "car_wash/your-cars.html", {"cars": cars})
 
 
 def appointment(request):
@@ -42,18 +46,18 @@ def appointment(request):
         if not date or not time or not model:
             return render(
                 request,
-                "carwash/appointment.html",
+                "car_wash/appointment.html",
                 {"error_message": "Fill all the fields"},
             )
         car = Car.objects.get(model=model)
         appointment = Appointment(user=request.user, date=(date + " " + time), car=car)
         appointment.save()
         context = {"logged_in": request.user.is_authenticated}
-        return render(request, "carwash/index.html", context)
+        return render(request, "car_wash/index.html", context)
     else:
         cars = Car.objects.filter(user=request.user)
         print(timezone.now())
-        return render(request, "carwash/appointment.html", {"cars": cars})
+        return render(request, "car_wash/appointment.html", {"cars": cars})
 
 
 def addCar(request):
@@ -63,19 +67,19 @@ def addCar(request):
         type = request.POST.get("type")
         if not brand or not model or not type:
             return render(
-                request, "carwash/car.html", {"error_message": "Fill all the fields"}
+                request, "car_wash/car.html", {"error_message": "Fill all the fields"}
             )
         car = Car.objects.create(user=request.user, brand=brand, model=model, type=type)
         car.save()
         context = {"logged_in": request.user.is_authenticated}
-        return render(request, "carwash/index.html", context)
+        return render(request, "car_wash/index.html", context)
     else:
-        return render(request, "carwash/car.html", {})
+        return render(request, "car_wash/car.html", {})
 
 
 def logout_view(request):
     logout(request)
-    return render(request, "carwash/index.html", {})
+    return render(request, "car_wash/index.html", {})
 
 
 def login_view(request):
@@ -88,7 +92,7 @@ def login_view(request):
             print("wrong")
             return render(
                 request,
-                "carwash/login.html",
+                "car_wash/login.html",
                 {"error_message": "Incorrect Email or Password"},
             )
         else:
@@ -96,15 +100,15 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 context = {"logged_in": request.user.is_authenticated}
-                return render(request, "carwash/index.html", context)
+                return render(request, "car_wash/index.html", context)
             else:
                 return render(
                     request,
-                    "carwash/login.html",
+                    "car_wash/login.html",
                     {"error_message": "Incorrect Email or Password"},
                 )
     else:
-        return render(request, "carwash/login.html", {})
+        return render(request, "car_wash/login.html", {})
 
 
 def register(request):
@@ -117,7 +121,7 @@ def register(request):
         if password != repeatPassword:
             return render(
                 request,
-                "carwash/register.html",
+                "car_wash/register.html",
                 {"error_message": "Passwords don't match"},
             )
         try:
@@ -126,7 +130,7 @@ def register(request):
             if isUsernameTaken:
                 return render(
                     request,
-                    "carwash/register.html",
+                    "car_wash/register.html",
                     {"error_message": "This Username is taken"},
                 )
         except User.DoesNotExist:
@@ -134,12 +138,12 @@ def register(request):
                 username=userName, email=email, password=password
             )
             user.save()
-            return render(request, "carwash/login.html", {})
+            return render(request, "car_wash/login.html", {})
         else:
             return render(
                 request,
-                "carwash/register.html",
+                "car_wash/register.html",
                 {"error_message": "User with this Email is already registered"},
             )
     else:
-        return render(request, "carwash/register.html", {})
+        return render(request, "car_wash/register.html", {})
