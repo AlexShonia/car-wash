@@ -9,5 +9,6 @@ authentication
         + error handling
         
 + user adds his car to his profile
-somehow show your added car somewhere
++ somehow show your added car somewhere
++ somehow show your added appointment somewhere
 + make an appointment with his car

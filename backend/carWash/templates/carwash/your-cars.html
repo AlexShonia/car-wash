@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your cars</title>
+    <style>
+      .nav {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <h1><a href="{% url 'carWash:index' %}">Home</a></h1>
+      <h1>Your Cars</h1>
+    </div>
+    <form
+      action="{% url 'carWash:yourCars' %}"
+      method="post"
+      style="display: flex; flex-direction: column; gap: 4px; width: 15%; margin: auto;"
+    >
+      {% csrf_token %} {% for car in cars %}
+      <div style="display: flex; justify-content: space-between">
+        <div>{{car.brand}} {{car.model}}</div>
+        <input type="checkbox" name="model" value="{{car.model}}" />
+      </div>
+      {% endfor %}
+      <button type="submit">Delete selected</button>
+    </form>
+  </body>
+</html>

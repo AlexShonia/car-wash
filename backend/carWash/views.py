@@ -10,6 +10,29 @@ def indexView(request):
 
     return render(request, "carwash/index.html", context)
 
+def yourAppointments(request):
+    if request.POST:
+       carModels = request.POST.getlist("model") 
+       for model in carModels:
+           Car.objects.filter(model=model).delete()
+       context = {"logged_in": request.user.is_authenticated}
+       return render(request, "carwash/index.html", context)
+    else:
+        appointments = Appointment.objects.filter(user=request.user)
+        print(appointments)
+        return render(request, "carwash/your-appointments.html", {"appointments": appointments})
+
+def yourCars(request):
+    if request.POST:
+       carModels = request.POST.getlist("model") 
+       for model in carModels:
+           Car.objects.filter(model=model).delete()
+       context = {"logged_in": request.user.is_authenticated}
+       return render(request, "carwash/index.html", context)
+    else:
+        cars = Car.objects.filter(user=request.user)
+        return render(request, "carwash/your-cars.html", {"cars": cars})
+
 
 def appointment(request):
     if request.POST:
