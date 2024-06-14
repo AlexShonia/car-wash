@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Time</title>
+  </head>
+  <body>
+    <form
+      action="{% url 'car_wash:make_appointment' %}"
+      method="post"
+      style="width: 5%; margin: auto"
+    >
+      {% csrf_token %} {% for time in times %}
+      <div style="display: flex; justify-content: space-between">
+        {% if time == 'Reserved' %}
+        <strong>{{time}}</strong>
+        {% else %}
+        <div>{{time}}</div>
+        <input type="checkbox" name="time" value="{{time}}" />
+        {% endif %}
+      </div>
+      {% endfor %}
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

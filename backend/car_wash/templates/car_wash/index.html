@@ -12,15 +12,15 @@
     <button><a href="{% url 'car_wash:login' %}">Login</a></button>
     {% endif %} {% if logged_in %}
     <button><a href="{% url 'car_wash:logout' %}">Log out</a></button>
-    <button><a href="{% url 'car_wash:addCar' %}">Add Car</a></button>
+    <button><a href="{% url 'car_wash:add_car' %}">Add Car</a></button>
     <button>
       <a href="{% url 'car_wash:appointment' %}">Make an appointment</a>
     </button>
     <button>
-      <a href="{% url 'car_wash:yourCars' %}">Your Cars</a>
+      <a href="{% url 'car_wash:your_cars' %}">Your Cars</a>
     </button>
     <button>
-      <a href="{% url 'car_wash:yourAppointments' %}">Your Appointments</a>
+      <a href="{% url 'car_wash:your_appointments' %}">Your Appointments</a>
     </button>
     {% endif %}
   </body>

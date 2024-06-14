@@ -29,7 +29,7 @@
       <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
       <h1>Make an appointment</h1>
     </div>
-    <form action="{% url 'car_wash:appointment' %}" method="post">
+    <form action="{% url 'car_wash:choose_time' %}" method="post">
       {% csrf_token %}
       <label for="date">Date</label>
       <input
@@ -40,7 +40,7 @@
         max="2024-12-31"
         required
       />
-      <label for="time">Time</label>
+      {% comment %} <label for="time">Time</label>
       <input
         type="time"
         name="time"
@@ -49,6 +49,7 @@
         step="1800"
         required
       />
+      {% endcomment %}
       <select name="car">
         {% for car in cars %}
         <option value="{{car.model}}">{{car.brand}} {{car.model}}</option>
@@ -57,7 +58,7 @@
       {% if error_message %}
       <p><strong>{{error_message}} </strong></p>
       {%endif%}
-      <button type="submit" style="width: 25%">Submit</button>
+      <button type="submit" style="width: 25%">Next</button>
     </form>
   </body>
 </html>

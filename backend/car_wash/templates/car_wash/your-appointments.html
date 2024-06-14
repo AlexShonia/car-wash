@@ -18,7 +18,7 @@
       <h1>Your Appointments</h1>
     </div>
     <form
-      action="{% url 'car_wash:yourAppointments' %}"
+      action="{% url 'car_wash:your_appointments' %}"
       method="post"
       style="
         display: flex;
@@ -34,7 +34,7 @@
           {{appointment.car.brand}} {{appointment.car.model}},
           {{appointment.date}}
         </div>
-        <input type="checkbox" name="date" value="{{appointment.date}}" />
+        <input type="checkbox" name="date" value="{{appointment.date|date:"Y-m-d H:i"}}" />
       </div>
       {% endfor %}
       <button type="submit">Delete selected</button>

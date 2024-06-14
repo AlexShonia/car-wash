@@ -30,7 +30,7 @@
       <h1><a href="{% url 'car_wash:index' %}">Home</a></h1>
       <h1>Add your Car</h1>
     </div>
-    <form action="{% url 'car_wash:addCar' %}" method="post">
+    <form action="{% url 'car_wash:add_car' %}" method="post">
       {% csrf_token %}
       <label for="email">Brand</label>
       <input type="text" name="brand" />
